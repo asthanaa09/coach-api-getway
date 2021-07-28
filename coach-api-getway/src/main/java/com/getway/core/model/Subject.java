@@ -23,8 +23,9 @@ public class Subject extends BaseEntity {
 
 	String name;
 	@Field(targetType = FieldType.STRING)
-	Float fee;
 	FeeType feeType;
+	
+	Float fee;
 	
 	@DBRef
 	Institution institution;

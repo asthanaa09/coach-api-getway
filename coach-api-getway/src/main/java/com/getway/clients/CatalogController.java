@@ -8,10 +8,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.getway.core.model.Student;
+import com.getway.core.repositoy.StudentRepository;
+
 @RestController
 @RequestMapping("/api/getway")
 public class CatalogController {
 
+	@Autowired
+	StudentRepository studentRepo;
+	
 	@Autowired
 	private CatalogClient catalogClient;
 
@@ -30,5 +36,10 @@ public class CatalogController {
 	public ResponseEntity<?> remove(@RequestParam("studentID") Long studentID,
 			@RequestParam("subjectID") Long subjectID) {
 		return new ResponseEntity<String>(catalogClient.removeCatalog(studentID, subjectID), HttpStatus.OK);
+	}
+	
+	@GetMapping("/st")
+	public Student test(@RequestParam("id") Long id) {
+		return studentRepo.findById(id).orElse(null);
 	}
 }
